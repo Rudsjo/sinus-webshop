@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import'./colors.scss';
+
+$header-font: 'Open Sans';
+$heavy: 700;
+$normal: 600;
+$light: 400;
+
+h1 {
+    font-family: $header-font;
+    font-weight: $heavy;
+}
+
+h2 {
+    font-family: $header-font;
+    font-weight: $normal;
+    opacity: .6;
+}
+
+h3 {
+    font-family: $header-font;
+    font-weight: $light;
+    opacity: .4;
+}
+
+p {
+    font-family: $header-font;
+    font-weight: $light;
+    opacity: .6;
+}
+
+input {
+    font-family: $header-font;
+    font-weight: $light;
+    padding: .4rem;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+button {
+    font-family: $header-font;
+    font-weight: $normal;
+}

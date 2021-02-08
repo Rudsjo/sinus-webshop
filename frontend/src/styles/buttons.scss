@@ -1,0 +1,48 @@
+@import'../styles/colors.scss';
+
+button {
+    border: transparent;
+    outline: none;
+
+    &.black {
+        background-image: url('~@/assets/icon-bag-white.svg'); 
+        background-repeat: no-repeat;
+        background-position: 25% 50%;
+        background-size: .8rem;
+        background-color: black;
+        text-indent: 20px;
+        color: white;
+        width: 6rem;
+        padding: .6rem;
+        border-radius: 50px;
+    }
+
+    &.red {
+        background-image: url('~@/assets/icon-bag-black.svg');
+        background-repeat: no-repeat;
+        background-color: $bg-red;
+        background-position: 51% 45%;
+        background-size: .7rem;
+        border-radius: 100%;
+        padding: 1rem;
+    }
+
+    &.grey {
+        background-image: url('~@/assets/icon-bag-black.svg');
+        background-repeat: no-repeat;
+        background-color: $bg-light-grey;
+        background-position: 51% 45%;
+        background-size: .7rem;
+        border-radius: 100%;
+        padding: 1rem;
+    }
+
+    &.login {
+        background-color: black;
+        color: white;
+        text-align: center;
+        width: 6rem;
+        padding: .6rem;
+        border-radius: 50px;
+    }
+}
