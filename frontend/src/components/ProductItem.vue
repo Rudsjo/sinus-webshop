@@ -15,14 +15,14 @@
 
 <script>
 export default {
-props:{
-    product: {}
-},
-computed:{
-    productImg(){
-        return require(`@/assets/${this.product.imgFile}`)
-    }
-},
+    props:{
+        product: {}
+    },
+    computed:{
+        productImg(){
+            return require(`@/assets/${this.product.imgFile}`)
+        }
+    },
 }
 </script>
 

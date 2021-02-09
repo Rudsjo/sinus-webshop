@@ -1,21 +1,26 @@
 <template>
   <div class="nav-container">
       <div class="logo"></div>
-      <div class="router-container">        
+      <div class="router-container dropdown">        
         <router-link class="link" to="/products">Products</router-link>
         <router-link class="link" to="/account" v-if="loggedIn">My Account</router-link>
         <button class="nav-login" v-else @click="openLogin">Login</button>
+        <div class="dropdown-content" v-if="showLogin">
+            <Login/>
+        </div>
         <button class="red" @click="openCart"></button>
       </div>
   </div>
 </template>
 
 <script>
-
+import Login from './Login'
 export default {
     name: 'Navbar',
+    components: { Login },
     data() {return {
-        loggedIn: false
+        loggedIn: false,
+        showLogin: false
     }},
 
     methods: { 
@@ -23,7 +28,7 @@ export default {
             console.log("cart open")
         },
         openLogin() {
-            console.log("login open")
+            this.showLogin = !this.showLogin
         }
     }
 }
@@ -45,9 +50,18 @@ export default {
 }
 
 .router-container {
-    display: flex;
+    position: relative;
+    display: inline-block;
     align-self: center;  
     align-items: center;
 }
 
+.dropdown-content {  
+    position: absolute; 
+    padding-top: .6rem;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 </style>
