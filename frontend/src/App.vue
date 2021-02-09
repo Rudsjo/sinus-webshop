@@ -16,10 +16,9 @@ export default {
 <style lang="scss">
 
 @import'~@/styles/globals.scss';
-@import'~@/styles/colors.scss';
 
 .main-container {
-  padding: 0 10% 0 10%;
+  padding: 5% 10% 0 10%;
 }
 
 footer {

@@ -45,4 +45,16 @@ button {
         padding: .6rem;
         border-radius: 50px;
     }
+
+    &.nav-login {
+        background-color: transparent;
+        margin: 0 1rem 0 1rem;
+        font-family: $header-font;
+        font-weight: $normal;
+        font-size: inherit;
+    }
+    
+    &:hover {
+        opacity: .8;
+    }
 }

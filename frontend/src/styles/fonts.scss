@@ -42,3 +42,15 @@ button {
     font-family: $header-font;
     font-weight: $normal;
 }
+
+.link {
+    margin: 0 1rem 0 1rem;
+    text-decoration: none;
+    color: inherit;
+    font-family: $header-font;
+    font-weight: $normal;
+
+    &:hover {
+        opacity: .8;
+    }
+}
