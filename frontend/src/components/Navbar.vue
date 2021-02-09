@@ -58,10 +58,11 @@ export default {
 
 .dropdown-content {  
     position: absolute; 
-    padding-top: .6rem;
+    margin-top: .6rem;
+    margin-left: -8.6rem; // kanske finns ett bättre sätt att flytta denna!
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1;   
 }
 </style>
