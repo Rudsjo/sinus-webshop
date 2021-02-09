@@ -1,8 +1,11 @@
 <template>
-  <div id="app" class="main-container">
-      <Navbar/>
-    <router-view/>
-    <footer></footer>
+  <div>
+    <div id="app" class="main-container">
+        <Navbar/>
+      <router-view/>
+    
+    </div>
+      <footer></footer>
   </div>
 </template>
 
@@ -24,10 +27,8 @@ export default {
 footer {
   height: 200px; 
   background-color: $bg-dark-grey;
-  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  
 }
 </style>

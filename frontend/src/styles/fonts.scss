@@ -7,11 +7,13 @@ $normal: 600;
 $light: 400;
 
 h1 {
+    font-size:1.5rem;
     font-family: $header-font;
     font-weight: $heavy;
 }
 
 h2 {
+    font-size:1.1rem;
     font-family: $header-font;
     font-weight: $normal;
     opacity: .6;
