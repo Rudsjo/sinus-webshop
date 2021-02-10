@@ -61,6 +61,16 @@
 <script>
 import CartItem from '../components/CartItem';
 export default {
+    data(){return{
+        name:"",
+        street:"",
+        zipcode:"",
+        city:"",
+        cardOwner:"",
+        cardNumber:"",
+        validUntil:"",
+        cvv:""
+    }},
     components:{
         CartItem,
     },
@@ -133,19 +143,12 @@ export default {
     padding: 1rem 0;
     margin: 1.5rem 0;
     height: 28rem;
+    overflow: auto;
 
     p {
         opacity: 1;
         font-weight: $heavy;
     }
-}
-
-.payment {
-
-}
-
-.details {
-     
 }
 
 input {

@@ -2,7 +2,9 @@
   <div>
     <div id="app" class="main-container">
         <Navbar/>
-      <router-view/>
+        <transition name="fade">
+          <router-view/>
+        </transition>
     
     </div>
       <footer></footer>
@@ -30,5 +32,11 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
 }
 </style>
