@@ -62,7 +62,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     gap:10px;
-    padding-top:1rem;
+    padding-top:2rem;
     padding-bottom: 1rem;
 }
 
