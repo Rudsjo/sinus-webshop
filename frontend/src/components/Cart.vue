@@ -1,42 +1,16 @@
 <template>
   <section class="cart-drop">
-        <ul>
-            <li>
-                <div class="list-item-container">
-                    <div class="left">
-                        <img src="~@/assets/hoodie-ocean.png">
-                        <div class="info-container">
-                            <p class="big-t">Namn</p>
-                            <p class="medium-t">Short</p>
-                            <p class="small-t">art.nr</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <p class="big-t">999</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="list-item-container">
-                    <div class="left">
-                        <img src="~@/assets/skateboard-greta.png">
-                        <div class="info-container">
-                            <p class="big-t">Namn</p>
-                            <p class="medium-t">Short</p>
-                            <p class="small-t">art.nr</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <p class="big-t">999</p>
-                    </div>
-                </div>
-            </li>
-        </ul>
+      <ul>
+        <CartItem v-for="(product, index) in products"
+        :key="index"
+        :product='product'/>
+      </ul>
+       
       <div class="bottom">
         <hr>
             <div class="total">
                 <p>TOTAL</p>
-                <p>2000</p>
+                <p>{{totalPrice}}</p>
             </div>
         <button class="black">Buy</button>
       </div>
@@ -44,8 +18,26 @@
 </template>
 
 <script>
+import CartItem from './CartItem';
 export default {
-
+    data(){return{
+        products: this.productList
+    }},
+    components:{
+        CartItem,
+    },
+    computed:{
+        productList(){
+            return this.$store.state.cart
+        },
+        totalPrice(){
+            let total = 0
+            for(const item in this.products){
+                total += item.price
+            }
+            return total
+        }
+    }
 }
 </script>
 
@@ -63,55 +55,6 @@ export default {
   width: 14rem;
   background-color: white;
   box-shadow: 0px 0px 34px 5px rgba(0,0,0,0.17);
-}
-
-.list-item-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: .6rem;
-    cursor: pointer;
-    
-    img {
-        width: 3rem;
-        object-fit: contain;
-        margin-right: .4rem;
-    }
-
-    li {
-        width: 12rem;
-        height: 3rem;
-
-        
-    }
-        &:hover {
-            background-color: $bg-light-grey;
-        }
-}
-
-.big-t {
-    font-weight: $heavy;
-    opacity: 1;
-}
-.medium-t {
-    font-size: small;
-}
-.small-t {
-    font-size: xx-small;
-}
-.left {
-    display: flex;
-}
-
-.right {
-    align-self: flex-start;
-}
-
-.info-container {
-    display: flex;
-    flex-direction: column;
-    
 }
 
 .bottom {

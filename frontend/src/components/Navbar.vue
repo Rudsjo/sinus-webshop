@@ -7,7 +7,7 @@
         <button class="nav-login" v-else @click="openLogin">Login</button>
             <transition name="fade">
                 <div class="dropdown-content login" v-if="showLogin">
-                    <Login/>
+                    <Login @close="showLogin= false"/>
                 </div>  
             </transition>
         <button class="red" @click="openCart"></button>

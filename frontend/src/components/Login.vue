@@ -3,7 +3,7 @@
     <input placeholder="Username" :model="username">
     <input type="password" placeholder="Password" :model="password">
     <div class="button-container">
-      <button class="login" @click="this.$router.push('/register')">Register</button>
+      <button class="login" @click="openRegister">Register</button>
       <button class="login" @click="Login">Login</button>
     </div>
   </section>
@@ -19,6 +19,10 @@ export default {
   }},
   
   methods: {
+    openRegister(){
+      this.$router.push('/register')
+      this.$emit('close')
+    },
     Login() {
 
     }
