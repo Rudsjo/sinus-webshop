@@ -1,7 +1,7 @@
 <template>
   <section class="login-drop">
-    <input placeholder="Username" :model="username">
-    <input type="password" placeholder="Password" :model="password">
+    <input placeholder="Username" v-model="username">
+    <input type="password" placeholder="Password" v-model="password">
     <div class="button-container">
       <button class="login" @click="openRegister">Register</button>
       <button class="login" @click="Login">Login</button>

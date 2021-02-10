@@ -1,7 +1,7 @@
 <template>
   <section class="cart-drop">
       <ul>
-        <CartItem v-for="(product, index) in products"
+        <CartItem v-for="(product, index) in productList"
         :key="index"
         :product='product'/>
       </ul>
@@ -12,7 +12,7 @@
                 <p>TOTAL</p>
                 <p>{{totalPrice}}</p>
             </div>
-        <button class="black">Buy</button>
+        <button class="black" @click="processOrder()">Buy</button>
       </div>
   </section>
 </template>
@@ -20,23 +20,26 @@
 <script>
 import CartItem from './CartItem';
 export default {
-    data(){return{
-        products: this.productList
-    }},
     components:{
         CartItem,
     },
     computed:{
         productList(){
-            return this.$store.state.cart
+             return this.$store.state.cart
         },
         totalPrice(){
             let total = 0
-            for(const item in this.products){
+            for(const item of this.productList){
                 total += item.price
             }
             return total
         }
+    },
+    methods: {
+      processOrder() {
+        this.$router.push('/order')
+        this.$emit('close')
+      }
     }
 }
 </script>

@@ -5,6 +5,7 @@ import Account from '../views/Account.vue'
 import Products from '../views/Products.vue'
 import Register from '../views/Register.vue'
 import Thanks from '../views/ThankYou.vue'
+import Order from '../views/Order.vue'
 
 Vue.use(VueRouter)
 
@@ -24,9 +25,14 @@ const routes = [
   {
     path: '/register',
     component: Register
-  },{
+  },
+  {
     path: '/thankyou',
     component: Thanks
+  },
+  {
+    path: '/order',
+    component: Order
   }
 ]
 

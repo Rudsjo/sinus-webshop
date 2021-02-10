@@ -9,12 +9,13 @@ export default new Vuex.Store({
   state: {
     productList: [],
     cart: [],
-    
-
   },
   mutations: {
     getProducts(state, items){
       state.productList = items
+    },
+    addToCart(state, item) {
+      state.cart.push(item)
     }
   },
   actions: {

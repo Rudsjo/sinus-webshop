@@ -4,12 +4,12 @@
     <ProductItem v-for="(product,index) in productList"
     :key=index
     :product='product'
-    @click.native="toggleModal(product)"
+    @click="toggleModal(product)"
     />
   </div>
   <div v-if="showModal">
     <Overlay :show="showModal" @close="showModal = false">
-      <ProductModal :product='chosenProduct'/>
+      <ProductModal :product='chosenProduct' @close="showModal = false"/>
     </Overlay> 
   </div>
 </div>

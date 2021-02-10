@@ -13,7 +13,7 @@
         <button class="red" @click="openCart"></button>
         <transition name="fade">
                 <div class="dropdown-content cart" v-if="showCart">
-                    <Cart/>
+                    <Cart  @close="showCart= false"/>
                 </div>  
             </transition>
       </div>

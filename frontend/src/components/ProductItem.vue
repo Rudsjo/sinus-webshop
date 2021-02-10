@@ -1,9 +1,12 @@
 <template>
-    <div class="product-card" :style="{'background-image': 'url('+ productImg +')'}">
+    <div class="product-card"
+    :style="{'background-image': 'url('+ productImg +')'}"
+    @click="$emit('click')">
+    
         <div class="product-info">
             <h1>{{this.product.title}}</h1>
             <h2>{{this.product.shortDesc}}</h2>
-            <button class="grey"></button>
+            <button class="grey" @click.stop="addToCart"></button>
             <div class="price">
                 <p>{{this.product.price}}</p>
                 <p class="sek-p">SEK</p>
@@ -23,6 +26,12 @@ export default {
             return require(`@/assets/${this.product.imgFile}`)
         }
     },
+
+    methods: {
+        addToCart() {
+            this.$store.commit('addToCart', this.product)
+        }
+    }
 }
 </script>
 
