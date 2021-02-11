@@ -11,6 +11,7 @@ export default new Vuex.Store({
     loggedIn: false,
     productList: [],
     cart: [],
+    token: "",
   },
   mutations: {
     getProducts(state, items){
@@ -22,10 +23,8 @@ export default new Vuex.Store({
     loginSuccess(state, user){
       state.currentUser = user
       state.loggedIn = true
+      state.token = user.token
     },
-    addToOrderHistory(state, order){
-      state.currentUser.orderHistory.push(order)
-    }
   },
   actions: {
     fetchProducts(context){
@@ -39,16 +38,12 @@ export default new Vuex.Store({
       })
       .catch((response) => alert(response))
     },
-    createOrder(context,order,token){
-      try{axios.post('http://localhost:5000/api/orders',order, 
-      )
-      .then((response) => {
-        context.commit('addToOrderHistory', response.data)
-      })
-      }catch(error){
-        console.log(error)
-      }
-    }
+    createOrder(context, order ){
+      axios.post('http://localhost:5000/api/orders/', {items: order}, {
+        headers: {
+          Authorization: 'Bearer ' + context.state.token
+        }
+      })}
   },
   modules: {
   }

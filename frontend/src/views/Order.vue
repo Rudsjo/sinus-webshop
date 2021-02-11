@@ -78,6 +78,13 @@ export default {
         productList(){
              return this.$store.state.cart
         },
+        orderIdList() {
+            let idList = []
+            for(const item of this.productList) {
+                idList.push(item._id)           
+            }
+            return idList
+        },
         totalPrice(){
             let total = 0
             for(const item of this.productList){
@@ -88,7 +95,7 @@ export default {
     },
     methods:{
         addOrder(){
-            this.$store.dispatch('createOrder',this.productList[0],this.$store.state.currentUser.token)
+            this.$store.dispatch('createOrder', this.orderIdList)
         }
     }
 }

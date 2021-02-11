@@ -14,7 +14,7 @@ module.exports = {
         if(validate(body)){
             const {items, customer, payment} = body
             const products = await Product.find(items)
-
+            
             items.forEach( id => {
                 const product = products.find(product => product._id == id)
                 if(product.amount){ product.amount++}
