@@ -24,7 +24,7 @@ export default {
         background-size: 3rem;
         background-repeat: no-repeat;
         background-position: right;
-        margin-right: 2rem;
+        
     }
     .order-info{
         cursor: pointer;

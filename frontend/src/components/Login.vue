@@ -1,7 +1,7 @@
 <template>
   <section class="login-drop">
-    <input placeholder="Username" v-model="username">
-    <input type="password" placeholder="Password" v-model="password">
+    <input placeholder="Email" v-model="user.email">
+    <input type="password" placeholder="Password" v-model="user.password">
     <div class="button-container">
       <button class="login" @click="openRegister">Register</button>
       <button class="login" @click="Login">Login</button>
@@ -14,8 +14,10 @@ export default {
   name: 'Login',
 
   data() {return {
-    username: "",
-    password: ""
+    user: {
+      email: "",
+      password: ""
+    }
   }},
   
   methods: {
@@ -24,7 +26,9 @@ export default {
       this.$emit('close')
     },
     Login() {
+      this.$store.dispatch('fetchUser', this.user)
 
+      this.$emit('close')
     }
   }
 }

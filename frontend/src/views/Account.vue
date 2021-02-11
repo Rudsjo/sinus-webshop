@@ -9,6 +9,7 @@
         <hr>
         <p>BigCityLife: {{}}</p>
         <hr>
+        <button>Logout</button>
       </div>
     </section>
     <section class="left">
