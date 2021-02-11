@@ -22,6 +22,9 @@ export default new Vuex.Store({
     loginSuccess(state, user){
       state.currentUser = user
       state.loggedIn = true
+    },
+    addToOrderHistory(state, order){
+      state.currentUser.orderHistory.push(order)
     }
   },
   actions: {
@@ -35,6 +38,16 @@ export default new Vuex.Store({
         context.commit('loginSuccess', response.data)
       })
       .catch((response) => alert(response))
+    },
+    createOrder(context,order,token){
+      try{axios.post('http://localhost:5000/api/orders',order, 
+      )
+      .then((response) => {
+        context.commit('addToOrderHistory', response.data)
+      })
+      }catch(error){
+        console.log(error)
+      }
     }
   },
   modules: {

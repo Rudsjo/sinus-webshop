@@ -53,7 +53,7 @@
                 </div>
             </div>
         </section>
-        <button class="black">Order</button>
+        <button @click="addOrder" class="black">Order</button>
       </section>
   </div>
 </template>
@@ -86,6 +86,11 @@ export default {
             return total
         }
     },
+    methods:{
+        addOrder(){
+            this.$store.dispatch('createOrder',this.productList[0],this.$store.state.currentUser.token)
+        }
+    }
 }
 </script>
 
