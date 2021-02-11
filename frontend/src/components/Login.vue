@@ -27,7 +27,6 @@ export default {
     },
     Login() {
       this.$store.dispatch('fetchUser', this.user)
-
       this.$emit('close')
     }
   }

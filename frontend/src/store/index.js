@@ -8,6 +8,7 @@ export default new Vuex.Store({
 
   state: {
     currentUser: {},
+    loggedIn: false,
     productList: [],
     cart: [],
   },
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     },
     loginSuccess(state, user){
       state.currentUser = user
+      state.loggedIn = true
     }
   },
   actions: {

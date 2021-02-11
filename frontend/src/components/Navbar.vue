@@ -3,11 +3,11 @@
       <div class="logo"></div>
       <div class="router-container dropdown">        
         <router-link class="link" to="/products">Products</router-link>
-        <router-link class="link" to="/account" v-if="loggedIn">My Account</router-link>
+        <router-link class="link" to="/account" v-if="$store.state.loggedIn">My Account</router-link>
         <button class="nav-login" v-else @click="openLogin">Login</button>
             <transition name="fade">
                 <div class="dropdown-content login" v-if="showLogin">
-                    <Login @close="checkLoggedIn"/>
+                    <Login @close="showLogin = false"/>
                 </div>  
             </transition>
         <button class="red" @click="openCart"></button>
@@ -27,7 +27,6 @@ export default {
     name: 'Navbar',
     components: { Login, Cart },
     data() {return {
-        loggedIn: false,
         showLogin: false,
         showCart: false,
     }},
@@ -39,13 +38,6 @@ export default {
         openLogin() {
             this.showLogin = !this.showLogin
         },
-        checkLoggedIn() {
-            this.showLogin = false
-
-            if(this.$store.state.currentUser != null) { 
-                this.loggedIn = !this.loggedIn
-            }
-        }
     }
 }
 </script>

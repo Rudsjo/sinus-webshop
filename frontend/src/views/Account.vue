@@ -1,18 +1,20 @@
 <template>
   <div class="main">
-    <section class="right">
+    <section class="left">
       <div class="img"></div>
       <div class="text-container">
-        <h2>Name: {{}}</h2>
+        <h2>Name: {{user.name}}</h2>
         <hr>
-        <p>Email: {{}}</p>
+        <p>Email: {{user.email}}</p>
         <hr>
-        <p>BigCityLife: {{}}</p>
+        <p>BigCityLife: {{user.adress.city}}</p>
         <hr>
-        <button>Logout</button>
+        <div class="logout">
+          <button class="login" @click="logout">Logout</button>
+        </div>
       </div>
     </section>
-    <section class="left">
+    <section class="right">
       <div class="button-container">
         <button @click="tabToggle = true">Orders</button>
         <div class="seperator"></div>
@@ -27,28 +29,28 @@
         <div class="info-text-container">
           <div class="text-box">
             <p>Street: </p>
-            <p>My street</p>
+            <p>{{user.adress.street}}</p>
           </div>
           <div class="text-box">
             <p>Zip: </p>
-            <p>Secret</p>
+            <p>{{user.adress.zip}}</p>
           </div>
           <div class="text-box">
             <p>City: </p>
-            <p>MankanJao</p>
+            <p>{{user.adress.city}}</p>
           </div>
           <hr>
           <div class="text-box">
             <p>Card Number: </p>
-            <p>13371337</p>
+            <p>Secret</p>
           </div>
           <div class="text-box">
             <p>Valid until</p>
-            <p>2021</p>
+            <p>Secret</p>
           </div>
           <div class="text-box">
             <p>CVV</p>
-            <p>232</p>
+            <p>Secret</p>
           </div>
         </div>
             
@@ -68,6 +70,20 @@ export default {
   data(){return{
     tabToggle: false
   }},
+
+  computed: {
+    user() {
+      return this.$store.state.currentUser.user
+    }
+  },
+
+  methods: {
+    logout() {
+      this.$store.state.loggedIn = false
+      this.$store.state.currentUser = {}
+      this.$router.push('/products')
+    }
+  }
 }
 </script>
 
@@ -86,22 +102,22 @@ export default {
       text-align: center;
     }
   }
-  .right{
+  .left{
     grid-column: 1/2;
     height: 28rem;
     background-color: $bg-dark-grey;
     color:white;
 
     .img{
-      height: 10rem;
+      height: 9rem;
       background-image: url('~@/assets/photo.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      margin:2rem;
+      margin:1rem;
     }
     .text-container{
-      margin:2rem;
+      margin:1rem 2rem;
       letter-spacing: .1rem;
 
       h2{
@@ -112,15 +128,28 @@ export default {
         opacity: .2;
       }
       p{
+        font-size: small;
         margin:1rem 0;
       }
     }
+
+    .logout {
+      display: flex;
+      justify-content: center;
+      margin-top: .8rem;
+
+      button {
+        background-color: $bg-red;
+        color: $bg-dark-grey;
+      }
+    }
   }
-  .left{
+  .right{
     grid-column: 2/3;
     height: 28rem;
     background-color:white;
   }
+
   .button-container{
     width:100%;
     height:3rem;
@@ -163,4 +192,5 @@ export default {
         background-repeat: no-repeat;
         background-position: center;
     }
+
 </style>
