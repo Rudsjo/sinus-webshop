@@ -27,7 +27,7 @@ export default {
     name: 'Navbar',
     components: { Login, Cart },
     data() {return {
-        loggedIn: false,
+        loggedIn: true,
         showLogin: false,
         showCart: false,
     }},
