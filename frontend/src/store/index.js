@@ -41,6 +41,19 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    registerUser(user){
+      axios.post('http://localhost:5000/api/register/',{
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        adress:{
+          street: user.adress.street,
+          zip: user.adress.zip,
+          city: user.adress.city
+        }     
+      })
+        .then((response) => alert(response))
+    },
     fetchProducts(context){
       axios.get('http://localhost:5000/api/products/')
       .then((result) => context.commit('getProducts',result.data) )

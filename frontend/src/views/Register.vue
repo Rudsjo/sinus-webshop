@@ -11,11 +11,23 @@
       <div class="input-container">
           <h1>Register</h1>
           <label for="name">Name</label>
-          <input v-model="name">
+          <input v-model="user.name">
           <label for="email">Email</label>
-          <input v-model="email">
+          <input v-model="user.email">
           <label for="password">Password</label>
-          <input type="password" v-model="password">
+          <input type="password" v-model="user.password">
+          <label for="street">Street</label>
+          <input v-model="user.adress.street">
+          <div class="city-zip">
+              <div>
+                <label for="zip">ZIP</label>
+                <input v-model="user.adress.zip">
+              </div>
+              <div>
+                <label for="city">City</label>
+                <input v-model="user.adress.city">
+              </div>
+          </div>
           <button class="login" @click="registerUser">Regga</button>
       </div>
   </div>
@@ -24,12 +36,21 @@
 <script>
 export default {
     data(){return{
-        name: "",
-        email: "",
-        password: ""
+       user:{
+            name: "",
+            email: "",
+            password: "",
+            adress:{
+                street: "",
+                zip: "",
+                city: ""
+            }
+        }
     }},
     methods:{
         registerUser(){
+            console.log(this.user)
+            this.$store.dispatch('registerUser',this.user.name)
             this.$router.push('/products')
         }
     }
@@ -79,7 +100,7 @@ export default {
     grid-column: 2/2;
 
     label{
-        padding:.6rem 0;
+        padding:.4rem 0;
     }
     input{
         background-color:transparent;
@@ -87,6 +108,12 @@ export default {
     button{
         margin:.6rem 0;
         align-self: flex-end;
+    }
+    .city-zip{
+        margin: .6rem 0;
+        gap:10px;
+        display: flex;
+        flex-direction: row;
     }
 }
 
