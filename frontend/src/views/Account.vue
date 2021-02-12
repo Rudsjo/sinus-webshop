@@ -16,13 +16,14 @@
     </section>
     <section class="right">
       <div class="button-container">
-        <button @click="tabToggle = true">Orders</button>
+        <button @click="openOrders">Orders</button>
         <div class="seperator"></div>
         <button @click="tabToggle = false">Payment</button>
       </div>
       <hr>
       <section v-if="tabToggle">
-        <OrderHistory/>
+        <OrderHistory v-for="(order,index) in orderHistory" :key="index"
+        :order="order"/>
       </section>
       <section v-else>
         <div class="image"></div>
@@ -74,16 +75,23 @@ export default {
   computed: {
     user() {
       return this.$store.state.currentUser.user
+    },
+    orderHistory() {
+      return this.$store.state.orderHistory
     }
   },
-
   methods: {
     logout() {
       this.$store.state.loggedIn = false
       this.$store.state.currentUser = {}
+      this.$store.state.token = ""
       this.$router.push('/products')
+    },
+    openOrders() {
+      this.tabToggle = true
+      this.$store.dispatch('fetchUserHistory')
     }
-  }
+  },
 }
 </script>
 
@@ -148,6 +156,7 @@ export default {
     grid-column: 2/3;
     height: 28rem;
     background-color:white;
+    overflow: auto;
   }
 
   .button-container{

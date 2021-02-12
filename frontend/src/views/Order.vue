@@ -19,7 +19,24 @@
           </div>
       </section>
       <section class="right">
-        <section class="details">
+        <form v-if="$store.state.loggedIn" class="details">
+            <h1>Your Details</h1>
+            <label>Your name</label>
+            <input v-model="user.name">
+            <label>Street</label>
+            <input v-model="user.adress.street">
+            <div class="lower-details">
+                <div>
+                    <label>ZIP code</label>
+                    <input v-model="user.adress.zip" >
+                </div>
+                <div>
+                    <label>City</label>
+                    <input v-model="user.adress.city">
+                </div>
+            </div>
+        </form>
+           <form v-else class="details">
             <h1>Your Details</h1>
             <label>Your name</label>
             <input v-model="name">
@@ -35,8 +52,8 @@
                     <input v-model="city">
                 </div>
             </div>
-        </section>
-        <section class="payment">
+        </form>
+        <form class="payment">
             <h1>Payment</h1>
             <label>Card Owner</label>
             <input v-model="cardOwner">
@@ -52,7 +69,7 @@
                     <input v-model="cvv">
                 </div>
             </div>
-        </section>
+        </form>
         <button @click="addOrder" class="black">Order</button>
       </section>
   </div>
@@ -91,11 +108,19 @@ export default {
                 total += item.price
             }
             return total
+        },
+        user() {
+            return this.$store.state.currentUser.user
         }
     },
+    // watch: {
+
+    // },
     methods:{
         addOrder(){
             this.$store.dispatch('createOrder', this.orderIdList)
+            this.$store.commit('resetCart')
+            this.$router.push('thankyou')
         }
     }
 }

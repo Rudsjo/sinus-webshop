@@ -10,6 +10,8 @@ export default new Vuex.Store({
     currentUser: {},
     loggedIn: false,
     productList: [],
+    orderHistory: [],
+    orderHistoryItems: [],
     cart: [],
     token: "",
   },
@@ -17,8 +19,20 @@ export default new Vuex.Store({
     getProducts(state, items){
       state.productList = items
     },
+    fillHistory(state, items) {
+      state.orderHistory = items
+    },
+    fillHistoryItems(state, item) {
+      state.orderHistoryItems.push(item)
+    },
     addToCart(state, item) {
       state.cart.push(item)
+    },
+    resetCart(state) {
+      state.cart = []
+    },
+    resetHistoryItems(state) {
+      state.orderHistoryItems = []
     },
     loginSuccess(state, user){
       state.currentUser = user
@@ -33,9 +47,16 @@ export default new Vuex.Store({
     },
     fetchUser(context,user) {
       axios.post('http://localhost:5000/api/auth/', {email: user.email, password: user.password})
-      .then((response) => { 
-        context.commit('loginSuccess', response.data)
+      .then((response) => context.commit('loginSuccess', response.data))
+      .catch((response) => alert(response))
+    },
+    fetchUserHistory(context) {
+      axios.get('http://localhost:5000/api/orders/', {
+        headers: {
+          Authorization: 'Bearer ' + context.state.token
+        }
       })
+      .then((response) => context.commit('fillHistory', response.data))
       .catch((response) => alert(response))
     },
     createOrder(context, order ){
@@ -43,7 +64,13 @@ export default new Vuex.Store({
         headers: {
           Authorization: 'Bearer ' + context.state.token
         }
-      })}
+      })
+    },
+    fetchProductById(context, id) {
+      axios.get(`http://localhost:5000/api/products/${id}`)
+      .then((response) => context.commit('fillHistoryItems', response.data))
+    }
+
   },
   modules: {
   }
