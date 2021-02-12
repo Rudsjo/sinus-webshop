@@ -28,7 +28,7 @@
                 <input v-model="user.adress.city">
               </div>
           </div>
-          <button class="login" @click="registerUser">Regga</button>
+          <button class="login" @click="registerUser">Regga</button> 
       </div>
   </div>
 </template>
@@ -48,9 +48,8 @@ export default {
         }
     }},
     methods:{
-        registerUser(){
-            console.log(this.user)
-            this.$store.dispatch('registerUser',this.user.name)
+        async registerUser(){
+            await this.$store.dispatch('registerUser',this.user)
             this.$router.push('/products')
         }
     }

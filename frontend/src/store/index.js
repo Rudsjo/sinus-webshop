@@ -39,24 +39,27 @@ export default new Vuex.Store({
       state.loggedIn = true
       state.token = user.token
     },
+    createSuccess(){
+      alert("User Created")
+    }
   },
   actions: {
-    registerUser(user){
-      axios.post('http://localhost:5000/api/register/',{
-        name: user.name,
-        email: user.email,
+    async registerUser(_ , user){
+      await axios.post('http://localhost:5000/api/register/', {
+        name: user.name, 
+        email: user.email, 
         password: user.password,
+        repeatPassword: user.password,
         adress:{
           street: user.adress.street,
           zip: user.adress.zip,
           city: user.adress.city
-        }     
+        }
       })
-        .then((response) => alert(response))
     },
     fetchProducts(context){
       axios.get('http://localhost:5000/api/products/')
-      .then((result) => context.commit('getProducts',result.data) )
+      .then((result) => context.commit('getProducts',result.data))
     },
     fetchUser(context,user) {
       axios.post('http://localhost:5000/api/auth/', {email: user.email, password: user.password})
