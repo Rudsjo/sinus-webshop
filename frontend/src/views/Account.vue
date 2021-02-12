@@ -87,9 +87,9 @@ export default {
       this.$store.state.token = ""
       this.$router.push('/products')
     },
-    openOrders() {
+    async openOrders() {
       this.tabToggle = true
-      this.$store.dispatch('fetchUserHistory')
+      await this.$store.dispatch('fetchUserHistory')
     }
   },
 }

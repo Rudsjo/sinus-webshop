@@ -2,6 +2,7 @@
   <section class="login-drop">
     <input placeholder="Email" v-model="user.email">
     <input type="password" placeholder="Password" v-model="user.password">
+    <label v-if="loginFailed" style="color: red">Wrong username or password</label>
     <div class="button-container">
       <button class="login" @click="openRegister">Register</button>
       <button class="login" @click="Login">Login</button>
@@ -17,7 +18,8 @@ export default {
     user: {
       email: "",
       password: ""
-    }
+    },
+    loginFailed: false
   }},
   
   methods: {
@@ -25,9 +27,14 @@ export default {
       this.$router.push('/register')
       this.$emit('close')
     },
-    Login() {
-      this.$store.dispatch('fetchUser', this.user)
-      this.$emit('close')
+    async Login() {
+      await this.$store.dispatch('fetchUser', this.user)
+      .then(() => {
+        this.$emit('close')
+      })
+      .catch(() => {
+        this.loginFailed = true
+      })
     }
   }
 }

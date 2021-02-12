@@ -39,9 +39,6 @@ export default new Vuex.Store({
       state.loggedIn = true
       state.token = user.token
     },
-    createSuccess(){
-      alert("User Created")
-    }
   },
   actions: {
     async registerUser(_ , user){
@@ -57,17 +54,17 @@ export default new Vuex.Store({
         }
       })
     },
-    fetchProducts(context){
-      axios.get('http://localhost:5000/api/products/')
+    async fetchProducts(context){
+      await axios.get('http://localhost:5000/api/products/')
       .then((result) => context.commit('getProducts',result.data))
     },
-    fetchUser(context,user) {
-      axios.post('http://localhost:5000/api/auth/', {email: user.email, password: user.password})
+    async fetchUser(context,user) {
+      await axios.post('http://localhost:5000/api/auth/', {email: user.email, password: user.password})
       .then((response) => context.commit('loginSuccess', response.data))
-      .catch((response) => alert(response))
+      // .catch((response) => alert(response))
     },
-    fetchUserHistory(context) {
-      axios.get('http://localhost:5000/api/orders/', {
+    async fetchUserHistory(context) {
+      await axios.get('http://localhost:5000/api/orders/', {
         headers: {
           Authorization: 'Bearer ' + context.state.token
         }
@@ -75,15 +72,15 @@ export default new Vuex.Store({
       .then((response) => context.commit('fillHistory', response.data))
       .catch((response) => alert(response))
     },
-    createOrder(context, order ){
-      axios.post('http://localhost:5000/api/orders/', {items: order}, {
+    async createOrder(context, order ){
+      await axios.post('http://localhost:5000/api/orders/', {items: order}, {
         headers: {
           Authorization: 'Bearer ' + context.state.token
         }
       })
     },
-    fetchProductById(context, id) {
-      axios.get(`http://localhost:5000/api/products/${id}`)
+    async fetchProductById(context, id) {
+      await axios.get(`http://localhost:5000/api/products/${id}`)
       .then((response) => context.commit('fillHistoryItems', response.data))
     }
 

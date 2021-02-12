@@ -12,7 +12,8 @@
           <h1>Register</h1>
           <label for="name">Name</label>
           <input v-model="user.name">
-          <label for="email">Email</label>
+          <label v-if="showError" style="color: red">Email already exists</label>
+          <label v-else for="email">Email</label>
           <input v-model="user.email">
           <label for="password">Password</label>
           <input type="password" v-model="user.password">
@@ -45,12 +46,18 @@ export default {
                 zip: "",
                 city: ""
             }
-        }
+        },
+        showError: false
     }},
     methods:{
         async registerUser(){
-            await this.$store.dispatch('registerUser',this.user)
-            this.$router.push('/products')
+            await this.$store.dispatch('registerUser', this.user)
+            .then(() =>  {
+                this.$router.push('/products')
+            })
+            .catch(() =>  {
+                this.showError = true
+            })  
         }
     }
 }

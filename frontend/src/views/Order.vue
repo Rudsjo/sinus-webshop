@@ -117,8 +117,8 @@ export default {
 
     // },
     methods:{
-        addOrder(){
-            this.$store.dispatch('createOrder', this.orderIdList)
+        async addOrder(){
+            await this.$store.dispatch('createOrder', this.orderIdList)
             this.$store.commit('resetCart')
             this.$router.push('thankyou')
         }

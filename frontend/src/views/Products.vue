@@ -48,8 +48,8 @@ export default {
     }
   },
 
-  created(){
-      this.$store.dispatch('fetchProducts')
+  async created(){
+      await this.$store.dispatch('fetchProducts')
   }
   
 }
