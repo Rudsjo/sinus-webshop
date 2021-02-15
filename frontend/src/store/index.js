@@ -108,6 +108,13 @@ export default new Vuex.Store({
         Authorization: 'Bearer ' + context.state.token
       }
     })
+    },
+    async deleteProduct(context, id){
+      await axios.delete(`http://localhost:5000/api/products/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + context.state.token
+        }
+      })
     }
 
   },

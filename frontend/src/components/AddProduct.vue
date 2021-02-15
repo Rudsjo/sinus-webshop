@@ -44,7 +44,9 @@ export default {
             shortDesc: "",
             longDesc: "",
             imgFile: "No-image.png"
-        }, 
+        },
+        //Hårdkodad test id
+        id: "cRReWkLepT3o1839", 
     }},
 
     computed: {
@@ -61,8 +63,8 @@ export default {
         async updateProduct(){
             
         },
-        deleteProduct(){
-
+        async deleteProduct(){
+            await this.$store.dispatch('deleteProduct', this.id)
         },
     }
     
