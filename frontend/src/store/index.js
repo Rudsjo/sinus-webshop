@@ -91,6 +91,19 @@ export default new Vuex.Store({
     async fetchProductById(context, id) {
       await axios.get(`http://localhost:5000/api/products/${id}`)
       .then((response) => context.commit('fillHistoryItems', response.data))
+    },
+    async createProduct(context, product){
+      await axios.post('http://localhost:5000/api/products', {
+        title: product.title,
+        price: product.price,
+        shortDesc: product.shortDesc,
+        longDesc: product.longDesc,
+        imageFile: product.imgFile
+      },{
+      headers: {
+        Authorization: 'Bearer ' + context.state.token
+      }
+    })
     }
 
   },
