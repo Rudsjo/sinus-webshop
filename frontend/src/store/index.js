@@ -15,6 +15,15 @@ export default new Vuex.Store({
     cart: [],
     token: "",
   },
+  getters: {
+    ordersInProcess: state => {
+      return state.orderHistory.filter(order => order.status == 'inProcess')
+    },
+    ordersDone: state => {
+      return state.orderHistory.filter(order => order.status == 'done')
+    }
+
+  },
   mutations: {
     getProducts(state, items){
       state.productList = items

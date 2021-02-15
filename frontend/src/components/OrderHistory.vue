@@ -41,9 +41,11 @@ export default {
     },
 
     methods: {
-        toggleHistory() {       
-            this.getOrderItem()
-            this.showItems = !this.showItems
+        toggleHistory() { 
+            if(this.$store.state.currentUser.user.role == 'customer') {
+                this.getOrderItem()
+                this.showItems = !this.showItems
+            }  
         },
 
         getOrderItem() {
