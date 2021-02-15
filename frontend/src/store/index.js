@@ -10,6 +10,7 @@ export default new Vuex.Store({
     currentUser: {},
     loggedIn: false,
     productList: [],
+    selectedProduct: {},
     orderHistory: [],
     orderHistoryItems: [],
     cart: [],
@@ -48,6 +49,9 @@ export default new Vuex.Store({
       state.loggedIn = true
       state.token = user.token
     },
+    selectProduct(state,product) {
+      state.selectedProduct = product
+    }
   },
   actions: {
     async registerUser(_ , user){

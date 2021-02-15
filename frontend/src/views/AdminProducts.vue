@@ -1,13 +1,13 @@
 <template>
   <main>
     <div>
-      <ProductEdit />
+      <AddProduct />
     </div>
     <div class="product-container">
       <ProductItem v-for="(product,index) in productList"
       :key=index
       :product='product'
-      @click="toggleModal(product)"
+      @click="selectProduct(product)"
       />
     </div>
   </main>
@@ -15,15 +15,24 @@
 
 <script>
 import ProductItem from '../components/ProductItem'
-import ProductEdit from '../components/ProductEdit'
+import AddProduct from '../components/AddProduct'
 export default {
   name:'AdminProducts',
 
-  components:{ ProductItem, ProductEdit},
+  data() {return {
+    openEdit: false
+  }},
+  components:{ ProductItem, AddProduct},
 
   computed:{
     productList(){
       return this.$store.state.productList
+    }
+  },
+  methods: {
+    selectProduct(product) {
+      this.$store.commit('selectProduct', product)
+      this.openEdit = !this.openEdit
     }
   }
 }

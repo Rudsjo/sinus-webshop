@@ -6,7 +6,7 @@
         <div class="product-info">
             <h1>{{this.product.title}}</h1>
             <h2>{{this.product.shortDesc}}</h2>
-            <button class="grey" @click.stop="addToCart"></button>
+            <button v-if="isCustomer" class="grey" @click.stop="addToCart"></button>
             <div class="price">
                 <p>{{this.product.price}}</p>
                 <p class="sek-p">SEK</p>
@@ -24,6 +24,10 @@ export default {
     computed:{
         productImg(){
             return require(`@/assets/${this.product.imgFile}`)
+        },
+
+        isCustomer() {
+            return (!this.$store.state.currentUser.user || this.$store.state.currentUser.user.role == 'customer')
         }
     },
 
