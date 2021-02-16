@@ -43,12 +43,28 @@ export default {
                  return require(`@/assets/${this.image}`)
              }
         },
+        validateProduct() {
+            if(!this.selectedItem.title || this.selectedItem.title.length < 1 || this.selectedItem.title[0] == " ") {
+                return false
+            } else if (!this.selectedItem.shortDesc || this.selectedItem.shortDesc.length < 1 || this.selectedItem.shortDesc[0] == " ") {
+                return false
+            } else if (!parseInt(this.selectedItem.price)) {
+                return false
+            } else {
+                return true
+            }
+
+        }
     },
 
     methods:{
         async updateProduct(){
-            await this.$store.dispatch('updateProduct', this.selectedItem)
-            await this.$store.dispatch('fetchProducts')
+            if(this.validateProduct) {
+                await this.$store.dispatch('updateProduct', this.selectedItem)
+                await this.$store.dispatch('fetchProducts')
+            } else {
+                alert("Something went wrong. Did you fill in the form correctly")
+            }
         },
         async deleteProduct(){
             await this.$store.dispatch('deleteProduct', this.selectedItem._id)

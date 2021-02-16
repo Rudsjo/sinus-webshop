@@ -36,6 +36,7 @@
 
 <script>
 export default {
+    name: 'Register',
     data(){return{
        user:{
             name: "",
@@ -51,14 +52,38 @@ export default {
     }},
     methods:{
         async registerUser(){
-            await this.$store.dispatch('registerUser', this.user)
-            .then(() =>  {
-                this.$router.push('/products')
-            })
-            .catch(() =>  {
-                this.showError = true
-            })  
-        }
+            if(this.validateUser && this.validateEmail) {  
+                await this.$store.dispatch('registerUser', this.user)
+                .then(() =>  {
+                    this.$router.push('/products')
+                })
+                .catch(() =>  {
+                    this.showError = true
+                })  
+                } else {
+                    alert("Something went wrong. Did you fill in the form correctly")
+                }
+            
+            }
+    },
+    computed: {
+        validateUser() {
+            if(!this.user.password || this.user.password.includes(" ") || this.user.password.length < 4) {
+                return false
+            } else if(!this.user.name || this.user.name.length < 1 || this.user.name[0] == " ") {
+                return false
+            } else {
+                return true
+            }
+        },
+        validateEmail() 
+        {
+            if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.user.email))
+            {
+                return (true)
+            }
+                return (false)
+            }
     }
 }
 </script>

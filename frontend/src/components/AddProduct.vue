@@ -43,10 +43,29 @@ export default {
 
     methods:{
         async addProduct(){
-            await this.$store.dispatch('createProduct', this.product)
-            this.product = {}
-            await this.$store.dispatch('fetchProducts')
+            if (this.validateProduct) {
+                await this.$store.dispatch('createProduct', this.product)
+                this.product = {}
+                await this.$store.dispatch('fetchProducts')
+            } else {
+                alert("Something went wrong. Did you fill in the form correctly")
+            }
         },
+    },
+
+    computed: {
+        validateProduct() {
+            if(!this.product.title || this.product.title.length < 1 || this.product.title[0] == " ") {
+                return false
+            } else if (!this.product.shortDesc || this.product.shortDesc.length < 1 || this.product.shortDesc[0] == " ") {
+                return false
+            } else if (!parseInt(this.product.price)) {
+                return false
+            } else {
+                return true
+            }
+
+        }
     }
     
 }
