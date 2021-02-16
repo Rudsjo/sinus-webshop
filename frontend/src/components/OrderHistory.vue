@@ -42,7 +42,7 @@ export default {
 
     methods: {
         toggleHistory() { 
-            if(this.$store.state.currentUser.user.role == 'customer') {
+            if(this.$store.state.currentUser.user.role == 'customer' || this.$store.state.currentUser.user.role == 'admin') {
                 this.showItems = !this.showItems
             }  
         },

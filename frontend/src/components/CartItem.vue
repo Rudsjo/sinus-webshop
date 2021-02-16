@@ -28,7 +28,8 @@ export default {
             return require(`@/assets/${this.product.imgFile}`)
         },
          checkRoute(){
-            return this.$router.history.current.path == '/account'   
+            return this.$router.history.current.path == '/account' 
+                   || this.$router.history.current.path == '/adminorders'  
         }
     },
     methods:{
