@@ -6,7 +6,7 @@
         <p>Order value: {{order.orderValue}}</p>
     </li>
         <ul v-if="showItems">
-            <CartItem v-for="(product,index) in orderHistoryItems" :key="index"
+            <CartItem v-for="(product,index) in getOrderHistoryItems" :key="index"
             :product="product"/>
         </ul>
   <hr>
@@ -34,27 +34,19 @@ export default {
             }
             return idList
         },
-        orderHistoryItems() {
-            return this.$store.state.orderHistoryItems
-        },
-     
+
+        getOrderHistoryItems() {
+            return this.$store.getters.getOrderHistoryItems(this.orderIdList)  
+        }
     },
 
     methods: {
         toggleHistory() { 
             if(this.$store.state.currentUser.user.role == 'customer') {
-                this.getOrderItem()
                 this.showItems = !this.showItems
             }  
         },
-
-        getOrderItem() {
-            this.$store.commit('resetHistoryItems')
-            for(const id of this.orderIdList) {
-                this.$store.dispatch('fetchProductById', id)
-            }
-        }
-    }
+    },
 }
 </script>
 

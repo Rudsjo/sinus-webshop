@@ -12,7 +12,7 @@ export default new Vuex.Store({
     productList: [],
     selectedProduct: {},
     orderHistory: [],
-    orderHistoryItems: [],
+    // orderHistoryItems: [],
     cart: [],
     token: "",
   },
@@ -22,8 +22,14 @@ export default new Vuex.Store({
     },
     ordersDone: state => {
       return state.orderHistory.filter(order => order.status == 'done')
+    },
+    getOrderHistoryItems: state => idArr => {
+      let items = []
+      for (const id of idArr) {
+        items.push(state.productList.find((product) => product._id == id))
+      }
+      return items
     }
-
   },
   mutations: {
     getProducts(state, items){

@@ -3,8 +3,8 @@
       <div class="nav-container" v-if="$store.state.currentUser.user == null || $store.state.currentUser.user.role == 'customer'">
         <div class="logo"></div>
         <div class="router-container dropdown">        
-            <router-link class="link" to="/products">Products</router-link>
-            <router-link class="link" to="/account" v-if="$store.state.loggedIn">My Account</router-link>
+            <router-link class="link" to="/products" @click.native="closeDropdown">Products</router-link>
+            <router-link class="link" to="/account" v-if="$store.state.loggedIn" @click.native="closeDropdown">My Account</router-link>
             <button class="nav-login" v-else @click="openLogin">Login</button>
                 <transition name="fade">
                     <div class="dropdown-content login" v-if="showLogin">
@@ -51,12 +51,15 @@ export default {
             this.showCart = false
         },
         logout() { //ska göras som mutation
-            this.showLogin = false,
-            this.showCart = false,
+            this.closeDropdown()
             this.$store.state.loggedIn = false
             this.$store.state.currentUser = {}
             this.$store.state.token = ""
             this.$router.push('/products')
+        },
+        closeDropdown() {
+            this.showLogin = false
+            this.showCart = false
         },
     }
 }
