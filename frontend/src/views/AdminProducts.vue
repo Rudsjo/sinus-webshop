@@ -8,7 +8,8 @@
     </div>
     <div>
       <AddProduct v-if="!openEdit"/>
-      <ProductEdit v-else :selectedItem="productItem"/>
+      <ProductEdit v-else :selectedItem="productItem"
+      :image="productItem.imgFile"/>
     </div>
     <div class="product-container">
       <ProductItem v-for="(product,index) in productList"
@@ -45,6 +46,10 @@ export default {
     toggle() {
       this.openEdit = !this.openEdit
     }
+  },
+
+  async beforeMount(){
+     await this.$store.dispatch('fetchProducts')
   }
 }
 </script>

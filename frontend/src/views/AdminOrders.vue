@@ -5,16 +5,16 @@
         <div class="head">
             <h2>In progress</h2> <hr/>
         </div>
-            <OrderHistory v-for="(order,index) in orderHistory" :key="index"
+            <OrderHistory v-for="(order,index) in inProgress" :key="index"
             :order="order"/> 
     </section>
-    <!-- <section>
+    <section>
         <div class="head">
             <h2>Done</h2> <hr/>
         </div>
         <OrderHistory v-for="(order,index) in done" :key="index"
         :order="order"/>
-    </section> -->
+    </section>
 </main>
 </template>
 
@@ -25,14 +25,11 @@ export default {
     components: { OrderHistory },
 
     computed: {
-        // inProgress() {
-        //     return this.$store.getters.ordersInProcess
-        // },
-        // done() {
-        //     return this.$store.getters.ordersDone
-        // },
-         orderHistory() {
-            return this.$store.state.orderHistory
+        inProgress() {
+            return this.$store.getters.ordersInProcess
+        },
+        done() {
+            return this.$store.getters.ordersDone
         }
     },
 

@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div id="app" class="main-container">
-        <Navbar/>
-        <transition name="fade">
-          <router-view/>
-        </transition>
-    
+      <div id="app" class="main-container">
+          <Navbar />
+          <transition name="fade">
+            <router-view/>
+          </transition>
     </div>
-      <footer></footer>
+      <footer>
+        <h2>Author: Mcuzz & P</h2>
+      </footer>
   </div>
 </template>
 
@@ -15,7 +16,7 @@
 import Navbar from './components/Navbar.vue'
 export default {
   components: { Navbar }
-  
+
 }
 </script>
 <style lang="scss">
@@ -32,6 +33,11 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+  h2{
+    display:flex;
+    text-align: bottom;
+    justify-content: center;
+  }
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;

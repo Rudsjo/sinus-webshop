@@ -3,7 +3,7 @@
       <div class="main-container">
           <div class="left">
             <label>Product Photo</label>
-            <div class="image border"></div>
+            <div class="image border" :style="{'background-image': 'url('+ productImg +')'}"></div>
           </div>
               <form>
                   <div class="middle">
@@ -32,7 +32,17 @@
 <script>
 export default {
     props: {
-        selectedItem: {}
+        selectedItem: {},
+        image: String 
+    },
+    computed:{
+         productImg(){
+             if(this.image == undefined){
+                 return require(`@/assets/No-image.png`)
+             }else{
+                 return require(`@/assets/${this.image}`)
+             }
+        },
     },
 
     methods:{
@@ -95,7 +105,6 @@ main{
     }
     .image{
         height:85%;
-        background-image: url('~@/assets/No-image.png');
         background-size:5rem;
         background-position: center;
         background-repeat: no-repeat;
