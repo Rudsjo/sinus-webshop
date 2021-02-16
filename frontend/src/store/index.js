@@ -118,7 +118,7 @@ export default new Vuex.Store({
         },
         data: {
             title: product.title, 
-            price: product.price,
+            price: Number(product.price),
             shortDesc: product.shortDesc,
             longDesc: product.longDesc,
             imgFile: product.imgFile

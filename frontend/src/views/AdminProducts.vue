@@ -1,7 +1,11 @@
 <template>
   <main>
-    <button @click="toggle">Add</button>
-    <button @click="toggle">Edit</button>
+    <h1>Admin products</h1>
+    <div class="buttons">
+      <button @click="toggle">Add</button>
+      <div class="border"></div>
+      <button @click="toggle">Edit</button>
+    </div>
     <div>
       <AddProduct v-if="openEdit"/>
       <ProductEdit :selectedItem="productItem" v-else/>
@@ -46,7 +50,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/styles/globals.scss';
 
+h1{
+  margin-top:1rem;
+  padding-left:1rem;
+}
 .product-container{
     display:flex;
     flex-wrap: wrap;
@@ -54,5 +63,25 @@ export default {
     gap:10px;
     padding-top:2rem;
     padding-bottom: 1rem;
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  height:2rem;
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-bottom: 1px solid $bg-light-grey;
+  
+  button{
+    background-color: $bg-dark-grey;
+    color: $bg-light-grey;
+    width: 100%;
+    &:focus{
+      opacity: .5;
+    }
+  }
+  .border{
+    border-left: 1px solid $bg-light-grey;
+  }
 }
 </style>

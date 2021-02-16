@@ -1,9 +1,5 @@
 <template>
   <main>
-      <h1>Admin products</h1>
-        <div class="head">
-            <h2>Add</h2> <hr/>
-        </div>
       <div class="main-container">
           <div class="left">
             <label>Product Photo</label>
@@ -26,7 +22,7 @@
                   </div>
               </form>
               <div class="button-container">
-                  <button class="login" @click="addProduct">Add</button>
+                  <button @click="addProduct">Add</button>
               </div>
       </div>
   </main>
@@ -60,8 +56,8 @@ export default {
 @import '~@/styles/globals.scss';
 main{
     
-    margin:.5rem;
-    padding:.5rem;
+    margin:0 .5rem .5rem .5rem;
+    padding:0 .5rem .5rem .5rem;
     
     label{
         color: $bg-light-grey;
@@ -138,18 +134,24 @@ main{
     }
 }
 .button-container{
-    grid-column: 1/4;
+    grid-column: 3/4;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap:5px;
-    margin: .5rem;   
+    justify-content: flex-end;
+    margin: .5rem;
+    padding-right: 1rem;
+    padding-bottom: .5rem;   
 
-    //Todo : fixa hover
-    .delete:hover{
-        background-color: $bg-red;
+    button{
+        padding: .4rem 1rem;
+        background-color: transparent;
+        color: $bg-light-grey;
+        border: 1px solid $bg-light-grey;
         
-    } 
+        &:hover{
+            background-color: $bg-light-grey;
+            color: $bg-dark-grey;
+        }
+    }
 }
 
 </style>

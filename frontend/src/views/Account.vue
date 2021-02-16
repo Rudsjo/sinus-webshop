@@ -168,6 +168,10 @@ export default {
       width:50%;
       background-color:white;
       transition: background-color .3s;
+      &:focus{
+         background-color: $bg-light-grey;
+        opacity: .5;
+      }
       &:hover{
         background-color: $bg-light-grey;
         opacity: .5;
