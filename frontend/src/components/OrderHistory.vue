@@ -32,12 +32,12 @@ export default {
             for(const item of this.order.items) {
                 idList.push(item)
             }
-            console.log(idList)
             return idList
         },
         orderHistoryItems() {
             return this.$store.state.orderHistoryItems
-        }
+        },
+     
     },
 
     methods: {

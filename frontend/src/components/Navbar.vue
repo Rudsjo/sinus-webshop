@@ -51,6 +51,8 @@ export default {
             this.showCart = false
         },
         logout() { //ska göras som mutation
+            this.showLogin = false,
+            this.showCart = false,
             this.$store.state.loggedIn = false
             this.$store.state.currentUser = {}
             this.$store.state.token = ""

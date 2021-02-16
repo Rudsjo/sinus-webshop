@@ -11,6 +11,7 @@
         </div>
         <div class="right">
             <p class="big-t">{{product.price}}</p>
+            <button v-if="!checkRoute" class="trash" @click="removeItem"></button>
         </div>
     </div>
     </li>
@@ -19,11 +20,20 @@
 <script>
 export default {
     props:{
-        product: {}
+        product: {},
+        index: Number
     },
     computed:{
          productImg(){
             return require(`@/assets/${this.product.imgFile}`)
+        },
+         checkRoute(){
+            return this.$router.history.current.path == '/account'   
+        }
+    },
+    methods:{
+        removeItem(){
+            this.$store.commit('removeItemFromCart', this.index)
         }
     }
 }
@@ -73,6 +83,23 @@ export default {
 
 .right {
     align-self: flex-start;
+    padding-right:.4rem;
+
+    button{
+        background-color:transparent;
+        margin-top:.5rem;
+        height:1.3rem;
+        width:1.3rem;
+        &:hover{
+            opacity: .5;
+        }
+    }
+}
+.trash{
+    background-image: url('~@/assets/trash.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.3rem;
 }
 
 .info-container {

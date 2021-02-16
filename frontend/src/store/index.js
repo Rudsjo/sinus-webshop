@@ -51,6 +51,9 @@ export default new Vuex.Store({
     },
     selectProduct(state,product) {
       state.selectedProduct = product
+    },
+    removeItemFromCart(state,itemIndex){
+      state.cart.splice(itemIndex,1)
     }
   },
   actions: {
@@ -74,7 +77,7 @@ export default new Vuex.Store({
     async fetchUser(context,user) {
       await axios.post('http://localhost:5000/api/auth/', {email: user.email, password: user.password})
       .then((response) => context.commit('loginSuccess', response.data))
-      // .catch((response) => alert(response))
+ 
     },
     async fetchUserHistory(context) {
       await axios.get('http://localhost:5000/api/orders/', {

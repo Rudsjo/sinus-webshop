@@ -3,7 +3,8 @@
       <ul>
         <CartItem v-for="(product, index) in productList"
         :key="index"
-        :product='product'/>
+        :product='product'
+        :index='index'/>
       </ul>
        
       <div class="bottom">

@@ -78,6 +78,7 @@ main{
         outline:none;
         height:85%;
         width:90%;
+        padding:.3rem;
     }
 }
 .main-container{

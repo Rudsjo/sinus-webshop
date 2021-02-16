@@ -2,13 +2,13 @@
   <main>
     <h1>Admin products</h1>
     <div class="buttons">
-      <button @click="toggle">Add</button>
+      <button @click="openEdit = false">Add</button>
       <div class="border"></div>
-      <button @click="toggle">Edit</button>
+      <button @click="openEdit = true">Edit</button>
     </div>
     <div>
-      <AddProduct v-if="openEdit"/>
-      <ProductEdit :selectedItem="productItem" v-else/>
+      <AddProduct v-if="!openEdit"/>
+      <ProductEdit v-else :selectedItem="productItem"/>
     </div>
     <div class="product-container">
       <ProductItem v-for="(product,index) in productList"
