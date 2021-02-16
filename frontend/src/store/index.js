@@ -79,7 +79,7 @@ export default new Vuex.Store({
     async fetchUserHistory(context) {
       await axios.get('http://localhost:5000/api/orders/', {
         headers: {
-          Authorization: 'Bearer ' + context.state.token
+          Authorization: context.state.token
         }
       })
       .then((response) => context.commit('fillHistory', response.data))
@@ -88,7 +88,7 @@ export default new Vuex.Store({
     async createOrder(context, order ){
       await axios.post('http://localhost:5000/api/orders/', {items: order}, {
         headers: {
-          Authorization: 'Bearer ' + context.state.token
+          Authorization: context.state.token
         }
       })
     },
@@ -102,17 +102,33 @@ export default new Vuex.Store({
         price: product.price,
         shortDesc: product.shortDesc,
         longDesc: product.longDesc,
-        imageFile: product.imgFile
+        imgFile: product.imgFile
       },{
       headers: {
-        Authorization: 'Bearer ' + context.state.token
+        Authorization: context.state.token
       }
     })
+    },
+    async updateProduct(context, product){ 
+      await axios({
+        method: 'PATCH',
+        url: `http://localhost:5000/api/products/${product._id}`,
+        headers: {
+          Authorization: context.state.token
+        },
+        data: {
+            title: product.title, 
+            price: product.price,
+            shortDesc: product.shortDesc,
+            longDesc: product.longDesc,
+            imgFile: product.imgFile
+        }
+      })
     },
     async deleteProduct(context, id){
       await axios.delete(`http://localhost:5000/api/products/${id}`, {
         headers: {
-          Authorization: 'Bearer ' + context.state.token
+          Authorization: context.state.token
         }
       })
     }

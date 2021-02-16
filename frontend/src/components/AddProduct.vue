@@ -2,7 +2,7 @@
   <main>
       <h1>Admin products</h1>
         <div class="head">
-            <h2>Add / Edit</h2> <hr/>
+            <h2>Add</h2> <hr/>
         </div>
       <div class="main-container">
           <div class="left">
@@ -27,8 +27,6 @@
               </form>
               <div class="button-container">
                   <button class="login" @click="addProduct">Add</button>
-                  <button class="login" @click="updateProduct">Update</button>
-                  <button class="login delete" @click="deleteProduct">Delete</button>
               </div>
       </div>
   </main>
@@ -43,28 +41,15 @@ export default {
             price: "",
             shortDesc: "",
             longDesc: "",
-            imgFile: "No-image.png"
+            imgFile: "No-image.png",
         },
-        //Hårdkodad test id
-        id: "cRReWkLepT3o1839", 
     }},
-
-    computed: {
-        selectedProduct() {
-            return this.$store.state.selectedProduct
-        },
-    },
 
     methods:{
         async addProduct(){
             await this.$store.dispatch('createProduct', this.product)
             this.product = {}
-        },
-        async updateProduct(){
-            
-        },
-        async deleteProduct(){
-            await this.$store.dispatch('deleteProduct', this.id)
+            await this.$store.dispatch('fetchProducts')
         },
     }
     

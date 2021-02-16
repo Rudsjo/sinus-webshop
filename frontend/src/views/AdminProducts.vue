@@ -1,7 +1,10 @@
 <template>
   <main>
+    <button @click="toggle">Add</button>
+    <button @click="toggle">Edit</button>
     <div>
-      <AddProduct />
+      <AddProduct v-if="openEdit"/>
+      <ProductEdit :selectedItem="productItem" v-else/>
     </div>
     <div class="product-container">
       <ProductItem v-for="(product,index) in productList"
@@ -16,13 +19,15 @@
 <script>
 import ProductItem from '../components/ProductItem'
 import AddProduct from '../components/AddProduct'
+import ProductEdit from '../components/ProductEdit'
 export default {
   name:'AdminProducts',
 
   data() {return {
-    openEdit: false
+    openEdit: false,
+    productItem: {}
   }},
-  components:{ ProductItem, AddProduct},
+  components:{ ProductItem, AddProduct, ProductEdit},
 
   computed:{
     productList(){
@@ -31,7 +36,9 @@ export default {
   },
   methods: {
     selectProduct(product) {
-      this.$store.commit('selectProduct', product)
+      this.productItem = {...product}
+    },
+    toggle() {
       this.openEdit = !this.openEdit
     }
   }
