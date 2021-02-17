@@ -105,7 +105,7 @@ export default {
         totalPrice(){
             let total = 0
             for(const item of this.productList){
-                total += item.price
+                total += Number(item.price)
             }
             return total
         },
