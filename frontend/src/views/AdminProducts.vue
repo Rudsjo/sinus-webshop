@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-if="$store.state.currentUser.user.role == 'admin'" >
     <h1>Admin products</h1>
     <div class="buttons">
       <button @click="openEdit = false">Add</button>

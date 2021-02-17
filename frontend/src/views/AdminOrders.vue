@@ -1,5 +1,5 @@
 <template>
-<main class="order-container">
+<main v-if="$store.state.currentUser.user.role == 'admin'" class="order-container">
   <h1>Order History</h1>
     <section>
         <div class="head">
