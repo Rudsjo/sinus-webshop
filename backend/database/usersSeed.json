@@ -32,5 +32,39 @@
             "cvv": "123"
         },
         "ordersHistory": []
+    },
+    {
+        "email": "frodo@shire.com",
+        "name": "Frodo Baggins",
+        "role": "customer",
+        "adress": {
+            "street": "Shireroad 4",
+            "zip": "123 46",
+            "city": "Fylke"
+        },
+        "payment": {
+            "cardOwner": "Frodo Baggins",
+            "cardNumber": "1234 5678 9101 1121",
+            "validUntil": "10 / 23",
+            "cvv": "123"
+        },
+        "ordersHistory": []
+    },
+    {
+        "email": "testgrupp@example.com",
+        "name": "Test Testsson",
+        "role": "customer",
+        "adress": {
+            "street": "Testvägen 4",
+            "zip": "123 45",
+            "city": "Testertorp"
+        },
+        "payment": {
+            "cardOwner": "Johan Kivi",
+            "cardNumber": "1234 5678 9101 1121",
+            "validUntil": "10 / 23",
+            "cvv": "123"
+        },
+        "ordersHistory": []
     }
 ]
