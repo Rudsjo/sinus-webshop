@@ -35,6 +35,7 @@ export default {
       .catch(() => {
         this.loginFailed = true
       })
+      await this.$router.push('/products')
     }
   }
 }

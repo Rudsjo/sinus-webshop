@@ -22,9 +22,11 @@
                   </div>
               </form>
               <div class="button-container">
+                  <h1 v-if="!validForms" style="color: red">Invalid product</h1>
                   <button class="update" @click="updateProduct">Update</button>
                   <button class= "delete" @click="deleteProduct">Delete</button>
               </div>
+     
       </div>
   </main>
 </template>
@@ -32,10 +34,12 @@
 <script>
 export default {
     name: 'ProductEdit',
-
+    data(){return{
+        validForms: true
+    }},
     props: {
         selectedItem: {},
-        image: String 
+        image: String
     },
     computed:{
          productImg(){
@@ -64,8 +68,9 @@ export default {
             if(this.validateProduct) {
                 await this.$store.dispatch('updateProduct', this.selectedItem)
                 await this.$store.dispatch('fetchProducts')
+                this.validForms = true;
             } else {
-                alert("Something went wrong. Did you fill in the form correctly")
+                this.validForms = false
             }
         },
         async deleteProduct(){
@@ -174,7 +179,9 @@ main{
     margin: .5rem;
     padding-right:1rem;
     padding-bottom: .5rem;
-
+    h1{
+        margin-right: 3rem;
+    }
     .update:hover{
         background-color: $bg-light-grey;
         color: $bg-dark-grey;

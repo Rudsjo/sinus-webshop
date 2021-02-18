@@ -50,11 +50,9 @@ export default {
             this.showLogin = !this.showLogin
             this.showCart = false
         },
-        logout() { //ska göras som mutation
+        logout() {
             this.closeDropdown()
-            this.$store.state.loggedIn = false
-            this.$store.state.currentUser = {}
-            this.$store.state.token = ""
+            this.$store.commit('logout')
             this.$router.push('/products')
         },
         closeDropdown() {

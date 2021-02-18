@@ -83,7 +83,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit('logout')
-      this.$router.push('/products')
+      this.$router.push('/')
     },
     async openOrders() {
       this.tabToggle = true

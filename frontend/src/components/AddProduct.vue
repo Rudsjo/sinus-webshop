@@ -22,6 +22,7 @@
                   </div>
               </form>
               <div class="button-container">
+                  <h1 v-if="!validForms" style="color: red">Invalid product</h1>
                   <button @click="addProduct">Add</button>
               </div>
       </div>
@@ -40,6 +41,7 @@ export default {
             longDesc: "",
             imgFile: "No-image.png",
         },
+        validForms: true
     }},
 
     methods:{
@@ -48,8 +50,9 @@ export default {
                 await this.$store.dispatch('createProduct', this.product)
                 this.product = {}
                 await this.$store.dispatch('fetchProducts')
+                this.validForms = true
             } else {
-                alert("Something went wrong. Did you fill in the form correctly")
+                this.validForms = false
             }
         },
     },
@@ -165,7 +168,9 @@ main{
     margin: .5rem;
     padding-right: 1rem;
     padding-bottom: .5rem;   
-
+    h1{
+        margin-right:3rem;
+    }
     button{
         padding: .4rem 1rem;
         background-color: transparent;

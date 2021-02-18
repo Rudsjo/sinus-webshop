@@ -43,9 +43,7 @@ export default new Vuex.Store({
     resetCart(state) {
       state.cart = []
     },
-    resetHistoryItems(state) {
-      state.orderHistoryItems = []
-    },
+   
     loginSuccess(state, user){
       state.currentUser = user
       state.loggedIn = true
@@ -60,7 +58,6 @@ export default new Vuex.Store({
       state.cart.splice(itemIndex,1)
     },
   },
-  // ALLA NYA CALLS MÅSTE FELHANTERAS MED .THEN OCH .CATCH
   actions: {
     async registerUser(_, user) {
       await API.registerUser(user)
