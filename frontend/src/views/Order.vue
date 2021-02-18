@@ -38,17 +38,22 @@
         </form>
            <form v-else class="details">
             <h1>Your Details</h1>
-            <label>Your name</label>
+            <label v-if="!validName" style="color: red">Must enter a valid name</label>
+            <label v-else>Your name</label>
             <input v-model="name">
-            <label>Street</label>
+
+            <label v-if="!validStreet" style="color: red">Must enter a valid street</label>
+            <label v-else>Street</label>
             <input v-model="street">
             <div class="lower-details">
                 <div>
-                    <label>ZIP code</label>
+                    <label v-if="!validZip" style="color: red">Must enter a valid zip-code</label>
+                    <label v-else>ZIP code</label>
                     <input v-model="zipcode">
                 </div>
                 <div>
-                    <label>City</label>
+                    <label v-if="!validCity" style="color: red">Must enter a valid city</label>
+                    <label v-else>City</label>
                     <input v-model="city">
                 </div>
             </div>
@@ -78,6 +83,8 @@
 <script>
 import CartItem from '../components/CartItem';
 export default {
+    name: 'Order',
+
     data(){return{
         name:"",
         street:"",
@@ -86,7 +93,11 @@ export default {
         cardOwner:"",
         cardNumber:"",
         validUntil:"",
-        cvv:""
+        cvv:"",
+        validName: true,
+        validStreet: true,
+        validZip: true,
+        validCity: true,
     }},
     components:{
         CartItem,
@@ -111,17 +122,47 @@ export default {
         },
         user() {
             return this.$store.state.currentUser.user
+        },
+        validate() {
+            if(this.validName && this.validStreet && this.validZip && this.validCity) {
+                return true
+            } else {
+                return false
+            }
         }
     },
-    // watch: {
-
-    // },
     methods:{
         async addOrder(){
-            await this.$store.dispatch('createOrder', this.orderIdList)
-            this.$store.commit('resetCart')
-            this.$router.push('thankyou')
-        }
+            this.validateName()
+            this.validateStreet()
+            this.validateCity()
+            this.validateZip()
+            if(this.validate) {
+                await this.$store.dispatch('createOrder', this.orderIdList)
+                this.$store.commit('resetCart')
+                this.$router.push('thankyou')
+            }
+        },
+        validateName() {
+            if(!this.name || this.name.length < 1 || this.name[0] == " ") {
+                this.validName = false
+            } else { this.validName = true }
+        },
+        validateStreet() {
+            if(!this.street || this.street.length < 1 || this.street[0] == " ") {
+                this.validStreet = false
+            } else { this.validStreet = true }
+        },
+        validateCity() {
+            if(!this.city || this.city.length < 1 || this.city[0] == " ") {
+                this.validCity = false
+            } else { this.validCity = true }
+        },
+        validateZip() {
+            if(!parseInt(this.zipcode) ||!this.zipcode || this.zipcode < 5 || this.zipcode[0] == " ") {
+                this.validZip = false
+            } else { this.validZip = true }
+        },
     }
 }
 </script>

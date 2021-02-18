@@ -4,13 +4,13 @@
         <div class="left">
             <img :src='productImg'>
             <div class="info-container">
-                <p class="big-t">{{product.title}}</p>
-                <p class="medium-t">{{product.shortDesc}}</p>
-                <p class="small-t">SN{{product.serial}}</p>
+                <p class="big-t">{{checkedProduct.title}}</p>
+                <p class="medium-t">{{checkedProduct.shortDesc}}</p>
+                <p class="small-t">SN{{checkedProduct.serial}}</p>
             </div>
         </div>
         <div class="right">
-            <p class="big-t">{{product.price}}</p>
+            <p class="big-t">{{checkedProduct.price}}</p>
             <button v-if="!checkRoute" class="trash" @click="removeItem"></button>
         </div>
     </div>
@@ -19,17 +19,37 @@
 
 <script>
 export default {
+    name: 'CartItem',
+    
     props:{
         product: {},
         index: Number
     },
     computed:{
-         productImg(){
-            return require(`@/assets/${this.product.imgFile}`)
+        productImg(){
+            if(this.product) {
+                return require(`@/assets/${this.product.imgFile}`)
+            } else {
+                 return require(`@/assets/${this.checkedProduct.imgFile}`)
+            }
         },
-         checkRoute(){
+        checkRoute(){
             return this.$router.history.current.path == '/account' 
                    || this.$router.history.current.path == '/adminorders'  
+        },
+        checkedProduct() {
+            if(!this.product) {
+                let newProduct = {
+                    title: "Item has been removed",
+                    shortDesc: "",
+                    price: "",
+                    serial: "",
+                    imgFile: "No-image.png" 
+                }
+                return newProduct
+            } else {
+                return this.product
+            }
         }
     },
     methods:{
@@ -59,9 +79,7 @@ export default {
 
     li {
         width: 12rem;
-        height: 3rem;
-
-        
+        height: 3rem; 
     }
         &:hover {
             background-color: $bg-light-grey;
@@ -72,12 +90,15 @@ export default {
     font-weight: $heavy;
     opacity: 1;
 }
+
 .medium-t {
     font-size: small;
 }
+
 .small-t {
     font-size: xx-small;
 }
+
 .left {
     display: flex;
 }
@@ -106,6 +127,5 @@ export default {
 .info-container {
     display: flex;
     flex-direction: column;
-    
 }
 </style>

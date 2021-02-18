@@ -11,11 +11,13 @@
 
 <script>
 export default {
-methods:{
-  mellon(){
-    this.$router.push('/products')
+  name: 'Home',
+
+  methods:{
+    mellon(){
+      this.$router.push('/products')
+    }
   }
-}
 }
 </script>
 

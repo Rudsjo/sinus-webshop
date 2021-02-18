@@ -14,6 +14,8 @@
 
 <script>
 export default {
+    name: 'ThankYou',
+    
     methods:{
         goHome(){
             this.$router.push('/products')

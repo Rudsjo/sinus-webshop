@@ -38,16 +38,16 @@ const routes = [
   },
   {
     path: '/order',
-    component: Order
+    component: Order,
   },
   {
     path: '/adminorders',
-    component: AdminOrders
+    component: AdminOrders,
   },
   {
     path: '/adminproducts',
-    component: AdminProducts
-  }
+    component: AdminProducts,
+  },
 ]
 
 const router = new VueRouter({

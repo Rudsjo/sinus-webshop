@@ -17,6 +17,8 @@
 
 <script>
 export default {
+    name: 'ProductModal',
+    
     props:{
         product: {}
     },

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
+import * as API from '../API/index.js'
 
 Vue.use(Vuex)
 
@@ -10,9 +11,7 @@ export default new Vuex.Store({
     currentUser: {},
     loggedIn: false,
     productList: [],
-    selectedProduct: {},
     orderHistory: [],
-    // orderHistoryItems: [],
     cart: [],
     token: "",
   },
@@ -38,9 +37,6 @@ export default new Vuex.Store({
     fillHistory(state, items) {
       state.orderHistory = items
     },
-    fillHistoryItems(state, item) {
-      state.orderHistoryItems.push(item)
-    },
     addToCart(state, item) {
       state.cart.push(item)
     },
@@ -55,93 +51,56 @@ export default new Vuex.Store({
       state.loggedIn = true
       state.token = user.token
     },
-    selectProduct(state,product) {
-      state.selectedProduct = product
+    logout(state) {
+      state.currentUser = {}
+      state.loggedIn = false
+      state.token = ""
     },
     removeItemFromCart(state,itemIndex){
       state.cart.splice(itemIndex,1)
-    }
+    },
   },
+  // ALLA NYA CALLS MÅSTE FELHANTERAS MED .THEN OCH .CATCH
   actions: {
-    async registerUser(_ , user){
-      await axios.post('http://localhost:5000/api/register/', {
-        name: user.name, 
-        email: user.email, 
-        password: user.password,
-        repeatPassword: user.password,
-        adress:{
-          street: user.adress.street,
-          zip: user.adress.zip,
-          city: user.adress.city
-        }
-      })
+    async registerUser(_, user) {
+      await API.registerUser(user)
     },
-    async fetchProducts(context){
-      await axios.get('http://localhost:5000/api/products/')
-      .then((result) => context.commit('getProducts',result.data))
-    },
-    async fetchUser(context,user) {
-      await axios.post('http://localhost:5000/api/auth/', {email: user.email, password: user.password})
-      .then((response) => context.commit('loginSuccess', response.data))
- 
-    },
-    async fetchUserHistory(context) {
-      await axios.get('http://localhost:5000/api/orders/', {
-        headers: {
-          Authorization: context.state.token
-        }
-      })
-      .then((response) => context.commit('fillHistory', response.data))
-      .catch((response) => alert(response))
-    },
-    async createOrder(context, order ){
-      await axios.post('http://localhost:5000/api/orders/', {items: order}, {
-        headers: {
-          Authorization: context.state.token
-        }
-      })
-    },
-    async fetchProductById(context, id) {
-      await axios.get(`http://localhost:5000/api/products/${id}`)
-      .then((response) => context.commit('fillHistoryItems', response.data))
-    },
-    async createProduct(context, product){
-      await axios.post('http://localhost:5000/api/products', {
-        title: product.title,
-        price: product.price,
-        shortDesc: product.shortDesc,
-        longDesc: product.longDesc,
-        imgFile: product.imgFile
-      },{
-      headers: {
-        Authorization: context.state.token
-      }
-    })
-    },
-    async updateProduct(context, product){ 
-      await axios({
-        method: 'PATCH',
-        url: `http://localhost:5000/api/products/${product._id}`,
-        headers: {
-          Authorization: context.state.token
-        },
-        data: {
-            title: product.title, 
-            price: Number(product.price),
-            shortDesc: product.shortDesc,
-            longDesc: product.longDesc,
-            imgFile: product.imgFile
-        }
-      })
-    },
-    async deleteProduct(context, id){
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
-        headers: {
-          Authorization: context.state.token
-        }
-      })
-    }
 
+    async fetchProducts(context) {
+      const result = await API.fetchProducts()
+      context.commit('getProducts', result.data)
+    },
+
+    async fetchUser(context, user) {
+      const result = await API.fetchUser(user)
+      context.commit('loginSuccess', result.data)
+    },
+
+    async fetchUserHistory(context) { 
+      const result = await API.fetchUserHistory(context.state.token)
+      context.commit('fillHistory', result.data)
+    },
+
+    async createOrder(context, order) {
+      await API.createOrder(context.state.token, order)
+    },
+
+    async createProduct(context, product) {
+      await API.createProduct(context.state.token, product)
+    },
+
+    async updateProduct(context, product) {
+      await API.updateProduct(context.state.token, product)
+    },
+
+    async deleteProduct(context, id) {
+      await API.deleteProduct(context.state.token, id)
+    },
+    //ANVÄNDS INTE FÖR NU
+    // async fetchProductById(_, id) {
+    //   const result = await API.fetchProductById(id)
+    //   context.commit('IMPLEMENT IF NEEDED', result.data)
+    // }
   },
   modules: {
   }

@@ -7,7 +7,7 @@
           </transition>
     </div>
       <footer>
-        <h2>Author: Mcuzz & P</h2>
+        <h2>Author: Marcus Welin & Pontus Pettersson</h2>
       </footer>
   </div>
 </template>
@@ -34,6 +34,7 @@ footer {
   left: 0;
   right: 0;
   h2{
+    padding-top: 5rem;
     display:flex;
     text-align: bottom;
     justify-content: center;

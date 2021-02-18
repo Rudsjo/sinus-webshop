@@ -10,13 +10,19 @@
       </div>
       <div class="input-container">
           <h1>Register</h1>
-          <label for="name">Name</label>
+
+          <label v-if="!validName" style="color: red">Invalid name</label>
+          <label v-else for="name">Name</label>
           <input v-model="user.name">
-          <label v-if="showError" style="color: red">Email already exists</label>
+
+          <label v-if="!validEmail" style="color: red">Invalid email</label>
           <label v-else for="email">Email</label>
-          <input v-model="user.email">
-          <label for="password">Password</label>
+          <input type="email" v-model="user.email">
+
+          <label v-if="!validPassword" style="color: red">Invalid password</label>
+          <label v-else for="password">Password</label>
           <input type="password" v-model="user.password">
+          
           <label for="street">Street</label>
           <input v-model="user.adress.street">
           <div class="city-zip">
@@ -37,6 +43,7 @@
 <script>
 export default {
     name: 'Register',
+    
     data(){return{
        user:{
             name: "",
@@ -48,42 +55,48 @@ export default {
                 city: ""
             }
         },
-        showError: false
+        validName: true,
+        validPassword: true,
+        validEmail: true
     }},
     methods:{
-        async registerUser(){
-            if(this.validateUser && this.validateEmail) {  
+        async registerUser(){ 
+            this.validateName()
+            this.validatePassword()
+            this.validateEmail()
+            if(this.validate) {
                 await this.$store.dispatch('registerUser', this.user)
                 .then(() =>  {
                     this.$router.push('/products')
                 })
-                .catch(() =>  {
-                    this.showError = true
-                })  
-                } else {
-                    alert("Something went wrong. Did you fill in the form correctly")
-                }
-            
-            }
-    },
-    computed: {
-        validateUser() {
-            if(!this.user.password || this.user.password.includes(" ") || this.user.password.length < 4) {
-                return false
-            } else if(!this.user.name || this.user.name.length < 1 || this.user.name[0] == " ") {
-                return false
-            } else {
-                return true
             }
         },
-        validateEmail() 
-        {
-            if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.user.email))
-            {
-                return (true)
+         validateName() {
+            if(!this.user.name || this.user.name.length < 1 || this.user.name[0] == " ") {
+                this.validName = false
+            } else { this.validName = true }
+        },
+        validatePassword() {
+            if(!this.user.password || this.user.password.includes(" ") || this.user.password.length < 4) {
+                  this.validPassword = false
+            } else {  this.validPassword = true }
+        },
+        validateEmail() {
+            if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.user.email)) {
+                this.validEmail = true
+            } else {
+                this.validEmail = false
             }
-                return (false)
+        }
+    },
+    computed: {
+        validate() {
+            if(this.validName && this.validEmail && this.validPassword) {
+                return true
+            } else {
+                return false
             }
+        }
     }
 }
 </script>

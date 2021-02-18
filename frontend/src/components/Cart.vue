@@ -21,6 +21,8 @@
 <script>
 import CartItem from './CartItem';
 export default {
+    name: 'Cart',
+
     components:{
         CartItem,
     },

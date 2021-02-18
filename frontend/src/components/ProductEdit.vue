@@ -31,6 +31,8 @@
 
 <script>
 export default {
+    name: 'ProductEdit',
+
     props: {
         selectedItem: {},
         image: String 
@@ -107,11 +109,13 @@ main{
         padding:.3rem;
     }
 }
+
 .main-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: $bg-dark-grey;
 }
+
 .left{
     grid-column: 1/2;
     width:100%;
@@ -121,15 +125,17 @@ main{
     }
     .image{
         height:85%;
-        background-size:5rem;
-        background-position: center;
+        background-size:8rem;
+        background-position: bottom;
         background-repeat: no-repeat;
     }
 }
+
 .middle{
     grid-column: 2/3;
     padding: .5rem;
 }
+
 .right{
     grid-column: 3/4;    
     padding: .5rem;
@@ -138,11 +144,13 @@ main{
         margin-left: .5rem;
     }
 }
+
 .border{
     border: 1px solid $bg-light-grey;
     margin: .5rem;
     opacity: .6;
 }
+
 .head {
     display: flex;
     flex-direction: row;
@@ -156,6 +164,7 @@ main{
         margin-left: 1rem;
     }
 }
+
 .button-container{
     grid-column: 1/4;
     display: flex;

@@ -63,8 +63,8 @@
 <script>
 import OrderHistory from '../components/OrderHistory'
 export default {
-  
   name: 'Account',
+
   components:{
     OrderHistory,
   },
@@ -82,9 +82,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.state.loggedIn = false
-      this.$store.state.currentUser = {}
-      this.$store.state.token = ""
+      this.$store.commit('logout')
       this.$router.push('/products')
     },
     async openOrders() {
@@ -98,7 +96,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/styles/globals.scss';
 
-  .main{
+.main{
     display:grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
@@ -109,101 +107,104 @@ export default {
       padding-top:1rem;
       text-align: center;
     }
+}
+.left{
+  grid-column: 1/2;
+  height: 28rem;
+  background-color: $bg-dark-grey;
+  color:white;
+
+  .img{
+    height: 9rem;
+    background-image: url('~@/assets/photo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin:1rem;
   }
-  .left{
-    grid-column: 1/2;
-    height: 28rem;
-    background-color: $bg-dark-grey;
-    color:white;
+  .text-container{
+    margin:1rem 2rem;
+    letter-spacing: .1rem;
 
-    .img{
-      height: 9rem;
-      background-image: url('~@/assets/photo.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      margin:1rem;
-    }
-    .text-container{
-      margin:1rem 2rem;
-      letter-spacing: .1rem;
-
-      h2{
-        margin:1rem 0;
-      }
-      hr{
-        margin: .5rem 0;
-        opacity: .2;
-      }
-      p{
-        font-size: small;
-        margin:1rem 0;
-      }
-    }
-
-    .logout {
-      display: flex;
-      justify-content: center;
-      margin-top: .8rem;
-
-      button {
-        background-color: $bg-red;
-        color: $bg-dark-grey;
-      }
-    }
-  }
-  .right{
-    grid-column: 2/3;
-    height: 28rem;
-    background-color:white;
-    overflow: auto;
-  }
-
-  .button-container{
-    width:100%;
-    height:3rem;
-    display: flex;
-    justify-content: space-evenly;
-    button{
-      width:50%;
-      background-color:white;
-      transition: background-color .3s;
-      &:focus{
-         background-color: $bg-light-grey;
-        opacity: .5;
-      }
-      &:hover{
-        background-color: $bg-light-grey;
-        opacity: .5;
-      }
-    }
-    .seperator{
-      border-left:1px solid $bg-dark-grey;
-      opacity: .2;
-      height:80%;
-      align-self: center;
+    h2{
+      margin:1rem 0;
     }
     hr{
-      width:90%;
+      margin: .5rem 0;
+      opacity: .2;
+    }
+    p{
+      font-size: small;
+      margin:1rem 0;
     }
   }
-  .info-text-container{
+
+  .logout {
     display: flex;
-    flex-direction: column;
-    padding:1rem;
-    
-    .text-box{
-      display:flex;
-      justify-content: space-between;
-      margin:.5rem;
+    justify-content: center;
+    margin-top: .8rem;
+
+    button {
+      background-color: $bg-red;
+      color: $bg-dark-grey;
     }
   }
-    .image{
-        height:5rem;
-        background-image: url('~@/assets/banken.png');
-        background-size: 5rem;
-        background-repeat: no-repeat;
-        background-position: center;
+}
+
+.right{
+  grid-column: 2/3;
+  height: 28rem;
+  background-color:white;
+  overflow: auto;
+}
+
+.button-container{
+  width:100%;
+  height:3rem;
+  display: flex;
+  justify-content: space-evenly;
+  button{
+    width:50%;
+    background-color:white;
+    transition: background-color .3s;
+    &:focus{
+        background-color: $bg-light-grey;
+      opacity: .5;
     }
+    &:hover{
+      background-color: $bg-light-grey;
+      opacity: .5;
+    }
+  }
+  .seperator{
+    border-left:1px solid $bg-dark-grey;
+    opacity: .2;
+    height:80%;
+    align-self: center;
+  }
+  hr{
+    width:90%;
+  }
+}
+
+.info-text-container{
+  display: flex;
+  flex-direction: column;
+  padding:1rem;
+  
+  .text-box{
+    display:flex;
+    justify-content: space-between;
+    margin:.5rem;
+  }
+}
+
+.image{
+    height:5rem;
+    background-image: url('~@/assets/banken.png');
+    background-size: 5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 </style>

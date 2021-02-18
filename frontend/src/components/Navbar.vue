@@ -1,7 +1,7 @@
 <template>
   <main>    
       <div class="nav-container" v-if="$store.state.currentUser.user == null || $store.state.currentUser.user.role == 'customer'">
-        <div class="logo"></div>
+        <div class="logo" @click="$router.push('/')"></div>
         <div class="router-container dropdown">        
             <router-link class="link" to="/products" @click.native="closeDropdown">Products</router-link>
             <router-link class="link" to="/account" v-if="$store.state.loggedIn" @click.native="closeDropdown">My Account</router-link>
@@ -14,7 +14,7 @@
             <button class="red" @click="openCart"></button>
             <transition name="fade">
                     <div class="dropdown-content cart" v-if="showCart">
-                        <Cart  @close="showCart= false"/>
+                        <Cart @close="showCart= false"/>
                     </div>  
                 </transition>
         </div>
@@ -71,6 +71,7 @@ export default {
     background-image: url('~@/assets/sinus-logo.svg');
     background-position: left;
     background-repeat: no-repeat;
+    cursor: pointer;
     width: 25%;
 }
 

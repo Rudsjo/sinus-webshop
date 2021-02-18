@@ -1,20 +1,26 @@
 <template>
-<main v-if="$store.state.currentUser.user.role == 'admin'" class="order-container">
-  <h1>Order History</h1>
-    <section>
-        <div class="head">
-            <h2>In progress</h2> <hr/>
-        </div>
-            <OrderHistory v-for="(order,index) in inProgress" :key="index"
-            :order="order"/> 
-    </section>
-    <section>
-        <div class="head">
-            <h2>Done</h2> <hr/>
-        </div>
-        <OrderHistory v-for="(order,index) in done" :key="index"
-        :order="order"/>
-    </section>
+<main class="order-container">
+<div v-if="!isAdmin" class="noAccess">
+    <h1>YOU SHALL NOT PASS!!</h1>
+    <button class="login" @click="$router.push('/')">Fly, you fools!</button>
+</div>
+<div v-else>
+    <h1>Order History</h1>
+        <section>
+            <div class="head">
+                <h2>In progress</h2> <hr/>
+            </div>
+                <OrderHistory v-for="(order,index) in inProgress" :key="index"
+                :order="order"/> 
+        </section>
+        <section>
+            <div class="head">
+                <h2>Done</h2> <hr/>
+            </div>
+            <OrderHistory v-for="(order,index) in done" :key="index"
+            :order="order"/>
+        </section>
+    </div>
 </main>
 </template>
 
@@ -22,6 +28,7 @@
 import OrderHistory from '../components/OrderHistory.vue'
 export default {
     name: 'AdminOrder',
+    
     components: { OrderHistory },
 
     computed: {
@@ -30,12 +37,19 @@ export default {
         },
         done() {
             return this.$store.getters.ordersDone
+        },
+        isAdmin () {
+            if(!this.$store.state.currentUser.user || this.$store.state.currentUser.user.role === 'customer') {
+                return false
+            } else {
+                return true
+            }
         }
     },
 
     async created() {
       await this.$store.dispatch('fetchUserHistory')
-    }
+    },
 }
 </script>
 
@@ -63,5 +77,12 @@ export default {
         align-self: center;
         margin-left: 1rem;
     }
+}
+
+.noAccess {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
 }
 </style>
